@@ -12,6 +12,7 @@ body{
     background:#f6f6f6;
     color:#333;
     text-align:center;
+    scroll-behavior: smooth; /* smooth scroll for anchor links */
 }
 
 /* Top Line */
@@ -124,18 +125,6 @@ nav a{
     font-weight:bold;
 }
 
-/* Secret Button */
-#secretTrigger{
-    position:fixed;
-    bottom:10px;
-    left:10px;
-    width:15px;
-    height:15px;
-    background:red;
-    border-radius:50%;
-    cursor:pointer;
-}
-
 /* Footer */
 .footer{
     background:#222;
@@ -164,13 +153,13 @@ nav a{
 <h3>Al Rahman General Store</h3>
 
 <nav>
-<a href="#">Home</a>
-<a href="#">Products</a>
+<a href="index.html">Home</a>
+<a href="products.html">Products</a> <!-- FIXED LINK -->
 </nav>
 </header>
 
 <!-- ABOUT -->
-<section class="section">
+<section class="section" id="about-section">
 <h2>السلام علیکم</h2>
 <p class="about-text">
 ہمارے ہاں چین سے امپورٹ کی گئی خوبصورت اور معیاری  
@@ -179,8 +168,8 @@ nav a{
 </p>
 </section>
 
-<!-- PRODUCTS -->
-<section class="section">
+<!-- PRODUCTS PREVIEW -->
+<section class="section" id="products-section">
 <h2>ہمارے ہاں چین کے معیاری گفٹس، لیس، جیولری اور کاسمیٹکس</h2>
 <div class="products" id="productBox"></div>
 </section>
@@ -201,19 +190,16 @@ nav a{
 <iframe id="videoFrame"></iframe>
 </div>
 
-<!-- Secret Button -->
-<div id="secretTrigger" title="Admin"></div>
-
 <script>
-// Products array
+// Products array (same as preview)
 let products=[
- {name:"چائنا گفٹ باکس",img:"images/gift1.jpg",video:"https://www.youtube.com/embed/VIDEO_ID"},
- {name:"چائنا شو پیس",img:"images/gift2.jpg",video:"https://www.youtube.com/embed/VIDEO_ID"},
- {name:"چائنا وال ڈیکور",img:"images/gift3.jpg",video:"https://www.youtube.com/embed/VIDEO_ID"},
- {name:"چائنا فینسی آئٹم",img:"images/gift4.jpg",video:"https://www.youtube.com/embed/VIDEO_ID"}
+ {name:"چائنا گفٹ باکس",img:"https://via.placeholder.com/200x150?text=Gift+1",video:"https://www.youtube.com/embed/dQw4w9WgXcQ"},
+ {name:"چائنا شو پیس",img:"https://via.placeholder.com/200x150?text=Gift+2",video:"https://www.youtube.com/embed/dQw4w9WgXcQ"},
+ {name:"چائنا وال ڈیکور",img:"https://via.placeholder.com/200x150?text=Gift+3",video:"https://www.youtube.com/embed/dQw4w9WgXcQ"},
+ {name:"چائنا فینسی آئٹم",img:"https://via.placeholder.com/200x150?text=Gift+4",video:"https://www.youtube.com/embed/dQw4w9WgXcQ"}
 ];
 
-// Render products
+// Render products preview
 function render(){
  let box=document.getElementById("productBox");
  box.innerHTML="";
@@ -227,13 +213,10 @@ function render(){
    </div>`;
  });
 }
-render();
 
 // WhatsApp order
 function order(name){
- window.open(
- "https://wa.me/923027453657?text=میں%20"+name+"%20خریدنا%20چاہتا%20ہوں"
- );
+ window.open("https://wa.me/923027453657?text=میں%20"+encodeURIComponent(name)+"%20خریدنا%20چاہتا%20ہوں");
 }
 
 // Open video
@@ -246,20 +229,8 @@ function closeVideo(){
  document.getElementById("videoModal").style.display="none";
 }
 
-// Admin unlock to add product
-document.getElementById("secretTrigger").onclick=()=>{
- let pass=prompt("Admin Password:");
- if(pass==="rahmanking302"){
-  let n=prompt("New Product Name:");
-  let i=prompt("Image path:");
-  let v=prompt("Video link:");
-  if(n && i){
-   products.push({name:n,img:i,video:v});
-   render();
-   window.open("https://wa.me/923027453657?text=New%20Product%20Added:%20"+n);
-  }
- }
-};
+// Initial render
+window.onload = render;
 </script>
 
 </body>
