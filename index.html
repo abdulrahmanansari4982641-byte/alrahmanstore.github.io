@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AL RAHMAN GENERAL STORE — BASEMENT</title>
+
+<style>
+body{
+    margin:0;
+    font-family:"Noto Nastaliq Urdu",Arial,sans-serif;
+    background:#f6f6f6;
+    color:#333;
+    text-align:center;
+}
+
+/* Top Line */
+.top-line{
+    background:linear-gradient(90deg,#0a7c4a,#12b76a);
+    color:white;
+    padding:12px;
+    font-weight:bold;
+}
+.brand-en{
+    display:block;
+    font-size:22px;
+    letter-spacing:2px;
+}
+
+/* Header */
+.header{
+    background:#0a7c4a;
+    color:white;
+    padding:20px;
+    position:relative;
+}
+nav a{
+    color:white;
+    margin:0 10px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+/* Section */
+.section{
+    padding:30px 20px;
+}
+.section h2{color:#0a7c4a;}
+
+/* About */
+.about-text{
+    max-width:900px;
+    margin:auto;
+    background:#fff;
+    padding:18px;
+    border-radius:14px;
+    line-height:2.2;
+    font-size:16px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* Products */
+.products{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+    max-width:1200px;
+    margin:auto;
+}
+.product-card{
+    background:#fff;
+    padding:15px;
+    border-radius:14px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.2);
+}
+.product-card img{
+    width:100%;
+    height:150px;
+    object-fit:cover;
+    border-radius:10px;
+}
+.product-card h4{
+    color:#0a7c4a;
+    font-size:14px;
+}
+
+/* Buttons */
+.button{
+    padding:7px 14px;
+    background:#0a7c4a;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    margin:4px;
+}
+.video-btn{background:#ff6600;}
+
+/* Video Modal */
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.8);
+    justify-content:center;
+    align-items:center;
+}
+.modal iframe{
+    width:90%;
+    height:300px;
+    border-radius:10px;
+}
+
+/* WhatsApp */
+.wa-btn{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:#25D366;
+    color:white;
+    padding:12px 20px;
+    border-radius:50px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+/* Secret Button */
+#secretTrigger{
+    position:fixed;
+    bottom:10px;
+    left:10px;
+    width:15px;
+    height:15px;
+    background:red;
+    border-radius:50%;
+    cursor:pointer;
+}
+
+/* Footer */
+.footer{
+    background:#222;
+    color:white;
+    padding:16px;
+    line-height:1.8;
+}
+
+/* Responsive */
+@media(max-width:900px){.products{grid-template-columns:repeat(2,1fr);} }
+@media(max-width:500px){.products{grid-template-columns:1fr;} }
+</style>
+</head>
+
+<body>
+
+<!-- TOP -->
+<div class="top-line">
+<span class="brand-en">AL RAHMAN GENERAL STORE — BASEMENT</span>
+ہم چین سے امپورٹ کیا گیا معیاری سامان فراہم کرتے ہیں
+</div>
+
+<!-- HEADER -->
+<header class="header">
+<h1>الرحمٰن جنرل اسٹور</h1>
+<h3>Al Rahman General Store</h3>
+
+<nav>
+<a href="#">Home</a>
+<a href="#">Products</a>
+</nav>
+</header>
+
+<!-- ABOUT -->
+<section class="section">
+<h2>السلام علیکم</h2>
+<p class="about-text">
+ہمارے ہاں چین سے امپورٹ کی گئی خوبصورت اور معیاری  
+جیولری، لیس، گفٹس، کاسمیٹکس اور جنرل اسٹور کی تمام اشیاء  
+مناسب قیمت پر دستیاب ہیں۔
+</p>
+</section>
+
+<!-- PRODUCTS -->
+<section class="section">
+<h2>ہمارے ہاں چین کے معیاری گفٹس، لیس، جیولری اور کاسمیٹکس</h2>
+<div class="products" id="productBox"></div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+<p>📞 Abdul Rahman: 0302-7453657</p>
+<p>📞 M. Usman: 0304-4776556</p>
+<p>📞 M. Kamran: 0304-9915638</p>
+<p>© 2026 AL RAHMAN GENERAL STORE — تمام سامان چین سے امپورٹ کیا گیا ہے</p>
+</footer>
+
+<!-- WhatsApp -->
+<a class="wa-btn" target="_blank" href="https://wa.me/923027453657">WhatsApp Abdul Rahman</a>
+
+<!-- Video Modal -->
+<div class="modal" id="videoModal" onclick="closeVideo()">
+<iframe id="videoFrame"></iframe>
+</div>
+
+<!-- Secret Button -->
+<div id="secretTrigger" title="Admin"></div>
+
+<script>
+// Products array
+let products=[
+ {name:"چائنا گفٹ باکس",img:"images/gift1.jpg",video:"https://www.youtube.com/embed/VIDEO_ID"},
+ {name:"چائنا شو پیس",img:"images/gift2.jpg",video:"https://www.youtube.com/embed/VIDEO_ID"},
+ {name:"چائنا وال ڈیکور",img:"images/gift3.jpg",video:"https://www.youtube.com/embed/VIDEO_ID"},
+ {name:"چائنا فینسی آئٹم",img:"images/gift4.jpg",video:"https://www.youtube.com/embed/VIDEO_ID"}
+];
+
+// Render products
+function render(){
+ let box=document.getElementById("productBox");
+ box.innerHTML="";
+ products.forEach(p=>{
+  box.innerHTML+=`
+   <div class="product-card">
+    <img src="${p.img}" alt="${p.name}">
+    <h4>${p.name}</h4>
+    <button class="button" onclick="order('${p.name}')">WhatsApp Order</button>
+    <button class="button video-btn" onclick="openVideo('${p.video}')">ویڈیو دیکھیں</button>
+   </div>`;
+ });
+}
+render();
+
+// WhatsApp order
+function order(name){
+ window.open(
+ "https://wa.me/923027453657?text=میں%20"+name+"%20خریدنا%20چاہتا%20ہوں"
+ );
+}
+
+// Open video
+function openVideo(v){
+ document.getElementById("videoFrame").src=v;
+ document.getElementById("videoModal").style.display="flex";
+}
+function closeVideo(){
+ document.getElementById("videoFrame").src="";
+ document.getElementById("videoModal").style.display="none";
+}
+
+// Admin unlock to add product
+document.getElementById("secretTrigger").onclick=()=>{
+ let pass=prompt("Admin Password:");
+ if(pass==="rahmanking302"){
+  let n=prompt("New Product Name:");
+  let i=prompt("Image path:");
+  let v=prompt("Video link:");
+  if(n && i){
+   products.push({name:n,img:i,video:v});
+   render();
+   window.open("https://wa.me/923027453657?text=New%20Product%20Added:%20"+n);
+  }
+ }
+};
+</script>
+
+</body>
+</html>
